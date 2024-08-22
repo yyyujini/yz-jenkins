@@ -12,14 +12,14 @@ pipeline {
             steps {
                 sh  """
                     echo ${WORKSPACE}
-                    git clone https://github.com/kimdragon50/facam-frontend.git
+                    git clone https://github.com/yyyujini/yz-frontend.git
                     """
             }
         }
         stage ('npm build') {
             steps {
                 sh  """
-                    cd facam-frontend
+                    cd yz-frontend
                     npm install
                     npm run build
                     """
@@ -29,12 +29,12 @@ pipeline {
             steps {
                 script {
 
-                    MY_KEYPAIR_NAME = ""
-                    MY_APP_PRIVATE_IP = "" 
+                    MY_KEYPAIR_NAME = "yz-default"
+                    MY_APP_PRIVATE_IP = "192.168.1.84" 
 
                     sh  """
-                        git clone https://github.com/kimdragon50/facam-ansible.git 
-                        cd  facam-ansible 
+                        git clone https://github.com/yyyujini/yz-ansible.git 
+                        cd  yz-ansible 
 
                         sed -i 's/MY_KEYPAIR_NAME/${MY_KEYPAIR_NAME}/g' hosts/hosts
                         sed -i 's/MY_APP_PRIVATE_IP/${MY_APP_PRIVATE_IP}/g' hosts/hosts
